@@ -2,11 +2,13 @@ package views;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 
 import controllers.LevenshteinController;
 import viewModels.LevenshteinViewModel;
@@ -74,7 +76,7 @@ public class LevenshteinMatrix extends JPanel {
 		            grid[i][j] = new JLabel();
 		            grid[i][j].setHorizontalAlignment(JLabel.CENTER);
 		            grid[i][j].setVerticalAlignment(JLabel.CENTER);
-		            grid[i][j].setBorder(new LineBorder(Color.BLACK));
+		            grid[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		            grid[i][j].setOpaque(true);
 		        }
 			}
@@ -126,13 +128,16 @@ public class LevenshteinMatrix extends JPanel {
 				for(int j = 3; j < column; j++) {
 					if(i % 2 == 1 && j % 2 == 1) {
 						if(result.direction[vert][hor].contains("D-") || result.direction[vert][hor].contains("D+")) {
-							grid[i - 1][j - 1].setText("\\"); 
+							grid[i - 1][j - 1] = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/ressource/arrow_southeast.svg.png")).getImage().getScaledInstance(12, 12, Image.SCALE_DEFAULT)));
+							grid[i - 1][j - 1].setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 						}
 						if(result.direction[vert][hor].contains("U")) {
-							grid[i - 1][j].setText("|");
+							grid[i - 1][j] = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/ressource/arrow_south.svg.png")).getImage().getScaledInstance(12, 12, Image.SCALE_DEFAULT)));
+							grid[i - 1][j].setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 						}
 						if(result.direction[vert][hor].contains("L")) {
-							grid[i][j - 1].setText("-");
+							grid[i][j - 1] = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("/ressource/arrow_east.svg.png")).getImage().getScaledInstance(12, 12, Image.SCALE_DEFAULT)));
+							grid[i][j - 1].setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 						}
 						hor++;
 					}
